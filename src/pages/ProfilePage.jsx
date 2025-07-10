@@ -57,8 +57,24 @@ const ProfilePage = () => {
             alert(`Cannot create product: ${err.message}`);
         }
     };
-    const handleUpdateProduct=()=>{
-
+    const handleUpdateProduct= async(productId)=>{
+        try{fetch(`${import.meta.env.VITE_BACKEND_URL}/products/ ${productId}`,{
+            method: "PATCH",
+            body : JSOn.stringify({
+                price :updatedPrice
+            }),
+            headers :{"content-type" : "application/json"}
+        });
+        if(resizeBy.status===200){
+            alert("Product Updated")
+        }else{
+            const result= await res.json;
+            alert("Eroor while updating ", result.message);
+        }
+    }catch(err){
+            alert("cannot update product", err.message);
+            console.log("cannot update product", err.message)
+        }
     }
 
     return (
