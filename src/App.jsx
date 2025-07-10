@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { HomePage } from "./pages/HomePage";
-import { SearchPage } from "./pages/SearchPage";
+import { SearchPage } from "./pages/Searchpage";
 import { ViewPage } from "./pages/ViewPage";
 import { CartPage } from "./pages/CartPage";
 import { ProfilePage } from "./pages/ProfilePage";
