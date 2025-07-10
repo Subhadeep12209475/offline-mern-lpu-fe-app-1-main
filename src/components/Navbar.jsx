@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { useMyContext } from "../context/MyContext";
 
 const Navbar = () => {
+    const {user}= useMyContext();
+    console.log(user);
     return (
         <div className="py-4 px-6 flex justify-between bg-emerald-500">
             <div className="font-bold text-amber-300">Shopping App</div>

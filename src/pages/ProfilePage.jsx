@@ -59,7 +59,7 @@ const ProfilePage = () => {
   };
   const handleUpdateProduct = async (productId) => {
     try {
-      const res = fetch(
+      const res = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/products/${productId}`,
         {
           method: "PATCH",
@@ -69,13 +69,13 @@ const ProfilePage = () => {
           headers: { "content-type": "application/json" },
         }
       );
-      if (res.ok) {
+      const result = await res.json();
+      if (res.status == 200) {
         alert("Product Updated");
         setEditProductId("");
         getData();
       } else {
-        const result = await res.json;
-        alert("Eroor while updating ", result.message);
+        alert(`Error while updating: ${result?.message || JSON.stringify(result)}`);
       }
     } catch (err) {
       alert("cannot update product", err.message);
