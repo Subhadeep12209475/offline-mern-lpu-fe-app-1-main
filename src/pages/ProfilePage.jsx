@@ -44,7 +44,7 @@ const ProfilePage = () => {
                 },
             });
 
-            if (resp.status == "201") {
+            if (resp.status ==201) {
                 alert("Product added!");
                 getData();
                 console.log(resp);
@@ -58,15 +58,18 @@ const ProfilePage = () => {
         }
     };
     const handleUpdateProduct= async(productId)=>{
-        try{fetch(`${import.meta.env.VITE_BACKEND_URL}/products/ ${productId}`,{
+        try{
+            const res=fetch(`${import.meta.env.VITE_BACKEND_URL}/products/${productId}`,{
             method: "PATCH",
-            body : JSOn.stringify({
+            body : JSON.stringify({
                 price :updatedPrice
             }),
             headers :{"content-type" : "application/json"}
         });
-        if(resizeBy.status===200){
+        if(res.status===200){
             alert("Product Updated")
+            setEditProductId("");
+            getData();
         }else{
             const result= await res.json;
             alert("Eroor while updating ", result.message);
