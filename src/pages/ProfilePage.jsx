@@ -3,7 +3,7 @@ import { Navbar } from "../components/Navbar";
 
 const ProfilePage = () => {
     const [products, setProducts] = useState([]);
-
+    const [editProductId , setEditProductId]= useState("");
     const getData = async () => {
         try {
             const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products`, {
@@ -88,7 +88,26 @@ const ProfilePage = () => {
                     return (
                         <div key={elem._id} className="p-4 rounded-lg border-1">
                             <p>{elem.title}</p>
-                            <p>{elem.price}</p>
+                            {elem._id===editProductId ? (
+                                <>
+                                <input className=" py-1 px-2 border-1 rounded-r-md"/>
+                            <button onClick={()=>{
+                                setEditProductId("");
+                            }}> cancle</button>
+                            </>
+                        ) :(
+                        <p> {elem.price}</p>)
+                }
+                            <button onClick={()=>{
+                                setEditProductId(elem._id)
+                            }}
+                            className="py-1 px-2 border-1 rounded-md"
+                            >
+                                Edit
+                            </button>
+                            {
+
+                            }
                         </div>
                     );
                 })}
