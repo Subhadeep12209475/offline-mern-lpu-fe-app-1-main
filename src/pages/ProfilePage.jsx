@@ -4,6 +4,7 @@ import { Navbar } from "../components/Navbar";
 const ProfilePage = () => {
     const [products, setProducts] = useState([]);
     const [editProductId , setEditProductId]= useState("");
+    const [ updatedPrice , setUpdatedPrice]= useState(-1);
     const getData = async () => {
         try {
             const resp = await fetch(`${import.meta.env.VITE_BACKEND_URL}/products`, {
@@ -56,6 +57,9 @@ const ProfilePage = () => {
             alert(`Cannot create product: ${err.message}`);
         }
     };
+    const handleUpdateProduct=()=>{
+
+    }
 
     return (
         <div>
@@ -90,10 +94,13 @@ const ProfilePage = () => {
                             <p>{elem.title}</p>
                             {elem._id===editProductId ? (
                                 <>
-                                <input className=" py-1 px-2 border-1 rounded-r-md"/>
+                                <input  value={updatedPrice} onChange={(e)=>setUpdatedPrice(e.target.value)} className=" py-1 px-2 border-1 rounded-r-md"/>
                             <button onClick={()=>{
                                 setEditProductId("");
                             }}> cancle</button>
+                            <button onClick={()=>{
+                                handleUpdateProduct(elem._id);
+                            }}>Update </button>
                             </>
                         ) :(
                         <p> {elem.price}</p>)
